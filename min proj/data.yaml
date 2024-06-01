@@ -1,0 +1,12 @@
+names:
+- car
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: parking-management-system
+  url: https://universe.roboflow.com/trainmodel-7ltm2/parking-management-system/dataset/2
+  version: 2
+  workspace: trainmodel-7ltm2
+test: ../test/images
+train: parking-management-system-2/train/images
+val: parking-management-system-2/valid/images
