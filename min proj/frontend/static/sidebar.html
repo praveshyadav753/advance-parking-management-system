@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Skeleton Loading Example</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+  <div id="app">
+    <div class="news-feed">
+      <div v-if="isLoading" class="skeleton-article" v-for="i in 6" :key="i">
+        <div class="skeleton-image"></div>
+        <div class="skeleton-title"></div>
+        <div class="skeleton-description"></div>
+      </div>
+      <div v-else class="article" v-for="article in articles" :key="article.id">
+        <img :src="article.imageUrl" alt="Article Image" class="article-image">
+        <h2 class="article-title">{{ article.title }}</h2>
+        <p class="article-description">{{ article.description }}</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <script>
+
+    new Vue({
+        el: '#app',
+        data() {
+          return {
+            articles: [],
+            isLoading: true,
+            error: null
+          }
+        },
+        mounted() {
+          this.fetchData();
+        },
+        methods: {
+          fetchData() {
+            fetch('your-api-endpoint')
+              .then(response => response.json())
+              .then(data => {
+                this.articles = data;
+                this.isLoading = false;
+              })
+              .catch(error => {
+                this.error = error;
+                this.isLoading = false;
+              });
+          }
+        }
+      })
+      
+  </script>
+</body>
+</html>

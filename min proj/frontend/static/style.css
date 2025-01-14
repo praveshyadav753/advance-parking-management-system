@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'poppins',sans-serif;
     
 }
 
@@ -11,213 +12,306 @@ body {
     grid-template-areas:
         "header header"
         "sidebar content";
-    grid-template-columns: 230px 1fr; /* Sidebar width and main content width */
+    grid-template-columns: 67px 1fr; /* Sidebar width and main content width */
     grid-template-rows: 55px 1fr; /* Header height and main content height */
     height: 100vh;
     width: 100vw;
     overflow: hidden;
     
-
 }
+
 
 .sidebar {
     grid-area: sidebar;
     position: fixed;
-    width: 230px;
-    height: calc(100% - 40px);
+    width: 66px;
+    height: 100%;
     background: none;
-    background-color: rgb(0, 0, 0); /* Lavender */
-    box-shadow: #162938;
-    top: 55px;
+    background-color: rgb(27, 72, 75); /* Lavender */
+    box-shadow: #2a745b;
+    top: 0px;
     z-index: 1000;
-    overflow: hidden;
+   
+    transition: all 0.3s ease;
+}
+.sidebar.active{
+
+    width: 220px;
+}
+.profile{
+    
+    top:40px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    min-height: 168px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+.profile, .profile h2{
+    justify-content: center;
+    text-align: center;
+    color:white;
+    font-size: 16px;
+    padding: 5px;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+
+}
+
+
+.profile h2{
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+}
+.sidebar.active .profile h2{
+opacity:1;
+}
+
+.vehicle{
+    display: flex;
+    gap: 7px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.sidebar .profile img{
+    width: 30px;
+     height:30px ;
+      border-radius: 50%;
+       display: block;
+        margin: auto; 
+        cursor: pointer;
+        transition: all 0.3s ease;
+}
+.sidebar.active .profile img {
+    width: 75px;
+    height:75px ;
+    
+}
+.sidebar .menu .navigation-name{
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.sidebar.active .menu .navigation-name{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu ul li{
+    list-style: none;
+    height:50px;
+    white-space: nowrap;
+    position: relative;
+    margin: 0 8px;
+    line-height: 50px;
+    border-radius: 12px;
    
 }
-
-header img {
-    height: 100%; /* Make the logo fill the entire height of the header */
-    width: auto; /* Maintain aspect ratio */
-    display: block; /* Ensure the image is treated as a block element */
+.sidebar.active ul li .tooltip
+{
+    display: none;
 }
-
-.menu ul {
-    list-style: none;
-    
-    
+.menu ul li .tooltip{
+    display: block;
+    position: absolute;
+    left: 122px;
+    top: 0;
+    transform: translate(-50%,-50%);
+    height: 35px;
+    width: 122px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    line-height:35px;
+    text-align: center;
+    transition: 0s;
+    opacity: 0;
+    pointer-events:none;
+}
+.menu ul li:hover .tooltip{
+    transition: all 0.5s ease;
+    top:50%;
+    opacity: 1;
+}
+.menu ul li a i{
+    height:50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    border-radius: 12px;
+    text-align: center;
+    flex-wrap: nowrap;
 }
 
 .menu ul li a {
-    display: block;
+    display: flex;
+    align-items: center;
     color: white;
-    padding: 15px;
-    margin: 13px;
     text-decoration: none;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
     width: 100%;
-    
+                                                        
+    border-radius: 12px;
 }
 
+
 .menu ul li a:hover {
-    background-color: #141414;
-   color: aqua;
-    
+    background-color: #969090b7;
 }
 nav ul li a:hover {
     color: hsl(0, 0%, 100%);
-    transform: scale(1.1);
     
+    
+}
+
+.nav-logout{
+    display: flex;
+    align-items: center;
+    color: white;
+    line-height: 50px;
+    height: 50px;
+    margin: 0 8px;
+    min-width: 50px;
+    position: absolute;
+    bottom: 50px;
+}
+.nav-logout i{
+    height:50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    border-radius: 12px;
+    text-align: center;
 }
 .horizontal-header {
     grid-area: header;
-    top: 0;
-    width: 100%;
-    position: fixed;
-    background-color: #141414;
-    color: rgb(255, 255, 255); /* Text color */
-     /* Padding around the header */
     display: flex;
+    top: 0;
+    right: 0;
+    width: calc(100% - 66px);
+    position: absolute;
+    /* background: linear-gradient(1deg, rgb(26, 216, 111), #861b7d); */
+    background-color: rgba(22, 72, 75);
+    color: rgb(22, 97, 116); /* Text color */
     height: 55px;
-    justify-content: space-between; /* Positions children (header-content and login) on opposite ends */
-    align-items: center; /* Vertically centers the children */
+    box-shadow: 0px 2px 13px rgb(27, 72, 75);
+    align-items: center; 
     z-index: 1001;
+    justify-content: space-between;
+    transition: all 0.3s ease;
 }
-.login{
-    align-items: center;
-    display: flex;
-    margin-right: 40px;
-    color: rgb(255, 255, 255);
-    transition: transform 0.2s;
-
-}
-.login-icon{
-    color: rgb(255, 255, 255);
-}
-.login a:hover
-{
-    transform: scale(1.5);
-}
-
-/** -----------login-------**/
-.wrapper{
-    position: fixed;
-    width: 400px;
-    height: 440px;
-    top:90px;
-    left: 40%;
-    background: transparent;
-    border: 2px solid rgba(255,255,255,.5);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 30px rgba(0,0,0,.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    transform: scale(0);
-    transition: transform .3s ease,height .2s ease;
-    z-index: 1000;
-}
-.wrapper.active-popup{
-    transform: scale(1);
-}
-.wrapper .form-box{
-    width:100%;
-    padding: 40px;
-    
-}
-.form-box h2{
-    font-size: 2em;
-    color: rgba(0, 0, 0, 0.641);
-    text-align: center;
-
-}
-.input-box{
-    position:relative;
-    width: 100%;
-    height: 70%;
-    border-bottom:2px solid #0b141b;
-    margin:60px 0;
-}
-
-.input-box label{
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform:translateY(-50%);
-    font-size:1em;
-    color: #060606;
-    font-weight: 500;
-    pointer-events: none;
-    transition: 0.5s;
-}
-.input-box input:focus~label, 
-.input-box input:valid~label{
-    top:-15px;
-
-}
-.input-box input{
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border:none;
-    outline: none;  
-    font-size: 1em;
-    color: #140909;
-    font-weight: 600;
-    padding: 0 40px 0 6px;
-    margin: 3px;
-}
-.input-box .icon{
-    position:absolute;
-    right: 5px;
-   bottom: 3px;
-    font-size:1.2em ;
-    color: black;
-    
-}
-.btn{
-    background-color: blue;
-    color: black;
-    width: 100%;
-    height: 50px;
-    margin: 6px;
-    font-size: 1.5em;
-    border-radius: 6px;
-    font-weight: 400;
-    cursor: pointer;
-
-}
-.forgot-pass{
-    font-weight: 500;
-    font-size: 1em;
-    transition:0.5s;
-    display: flex;
-
-}
-.forgot-pass a {
-    color: #000000;
-    text-decoration: none;
-}
-.forgot-pass a:hover{
-  text-decoration: underline 2px;
-}
-.wrapper .close{
-    position: absolute;
-    top: 0;
-    right: 0 ;
-    width: 45px;
-    height: 45px;
-    background: #141414;
-    font-size:2em ;
-    color: #fff;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    z-index: top;
-   border-bottom-left-radius: 19px;
+.sidebar.active ~ .horizontal-header {
+    width: calc(100% - 220px); /* Adjust based on sidebar width */
    
 }
+.logo-bar{
+    
+    margin-left:5px;
+    display: flex;  
+    align-items: center;
+
+}
+.logo-head img{
+    width: 100%;
+}
+.bar{
+    display: flex;
+    align-items: center;
+    color: white;
+    line-height: 50px;
+    height: 50px;
+    margin: 0 8px;
+    min-width: 50px;
+    position: absolute;
+    top:10px;
+}
+summary{
+    line-height: 30px;
+}
+.bar i{
+    height:50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    border-radius: 12px;
+    text-align: center;
+}
+.bar:hover{
+    transform: scale(1.2);
+    color: #ffffff;
+}
+.sidebar.active .bar .i{
+    left:30;
+}
+.login-main{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-right:5px;
+}
+.login{
+    padding:5px;
+}
+
+
+.login-icon{
+    display: inline-block;
+    font-size: 22px; 
+    color: #ffffff; 
+    text-decoration: none; 
+    
+}
+.login-icon:hover
+{
+    color: #007bff; 
+    transform: scale(1.1);
+}
+.notification-bell{
+    display: flex;
+    position: relative;
+    line-height: 50px;
+    color: white;
+    font-size:25px;
+    align-items: center;
+   
+}
+.notification-bell::after{
+content: attr(noti-count);
+ width: 12px;
+ position: absolute;
+ top:4px;
+ right: -5px;
+ height: 12px;
+ border-radius: 50%;
+ background-color: red;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ color: #fff;
+ font-size: 13px;
+ border:2px solid rgb(27, 72, 75);
+ cursor: pointer;
+}
+.header-right{
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    right:60px;
+    width: 15%;
+}
+.profile-view  img{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    border: #0a0a0a;
+  }
+
+
 
 /* Style for active items */
 .menu ul li a.active {
@@ -257,16 +351,115 @@ nav ul li a:hover {
 .content-area {
     margin: 2px;
     grid-area: content;
-    
-    width: calc(100vw - 237px);
+    width: calc(100vw - 67px); 
+    transition: all 0.3s ease;
     height: auto;
     position: relative;
     overflow-y: hidden;
     display:flex;
+    left:0;
+    box-sizing: border-box;
     justify-content: space-around;
      /* Adjust padding to create space for header and home */
 }
+.sidebar.active ~ .content-area{
+    width: calc(100% - 153px);
+    transform: translateX(153px);/*(220-67)*/
+    grid-column: 2;
 
+
+}
+
+.home-space{
+    width:720px;
+   margin-top: 20px;
+   margin-left: 20px;
+    display: flex;
+    justify-content: space-around       ;
+}
+.space-available{
+    display: flex;
+            align-items: center;
+            background-image: linear-gradient(70deg,rgba(14, 110, 78, 0.9),rgba(189, 167, 69, 0.5));
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 12px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 19px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+
+}
+.space-info {
+    padding-left: 15px;
+}
+
+.space-info h3 {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #dadada;
+}
+
+.space-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+}
+
+.space-info li {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.total-space-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #dadada;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.available-space-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+.occupied-space-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #f71111;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+#myChart,#myChart2{
+    width: 100px;
+   height: 100px;;
+}
+.space-occupied{
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+   box-sizing: border-box;
+   overflow: hidden;
+    background-image: linear-gradient(70deg,rgba(16, 80, 59, 0.9),rgba(71, 69, 189, 0.5));
+    
+}
+.home-space img{
+    width: 70px;
+    height: 60px;
+
+}
 .above-parking-layout {
     grid-area: content; /* Position within the grid layout */
     position: relative;
@@ -281,18 +474,29 @@ nav ul li a:hover {
    
  }
 
-
+ .layout-live{
+    max-width: 1000px;
+    position: relative;
+    left:100px;
+ }
+ .toggle-layout{
+    position: absolute;
+    top: 2px;
+    left: 7px;
+    z-index: 700;
+    margin-bottom: 30px;
+ }
 
 .parking-layout 
 {
         position: relative;
-        width:990px;
+        max-width:1000px;
         height: 600px;
         background-color: rgb(97, 118, 139);
         border: 1px solid rgb(22, 22, 22); /* Ensure the border is applied */
         overflow-y:auto;
         margin: 25px auto auto auto;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.267); /* Add a shadow effect */
         border-radius: 10px;
         
 }
@@ -326,104 +530,16 @@ nav ul li a:hover {
     margin-top: 13px;
     white-space: nowrap;
 }
-
-/* Other CSS rules remain unchanged */
-
-
-/* Other CSS rules remain unchanged */
-
-  
 .car-svg:hover {
-    transform: scale(1.2) rotate(90deg); /* Optional: for a nice hover effect */
+    transform: scale(1.1) rotate(90deg); 
     
 }
-/* .area-number {
-    position: absolute;
-    color: rgb(0, 0, 0);
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-size: 1em;
-    text-align: center;
-    margin-top: 13px;
-    white-space: nowrap;
- } */
-/* --------------------------------------toggle button---------------------*/ 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #d4cfcf;
-    border-radius: 10px;
-    position: absolute;
-    background-color:rgb(243, 243, 243);
-    display: block;
-    z-index:1900;
-    left: -600px;
-    top: 0;
-    transition: left 0.5s ease; 
-}
-.container.visible {
-    left: 0; 
-}
+
+/* --------------------------------------toggle button---------------------*/
 
 
-.profile-picture {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.profile-picture img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ccc;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.container label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.container input[type="text"],  
-input[type="email"],
-input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
 
 
-.profile-section {
-    text-align: center;
-}
-
-.profile-section button {
-    margin: 10px; /* Adjust as needed */
-    border-radius: 8px;
-}
-/*----*/
 .view-toggle {
     padding: 10px 20px;
     background-color: #007bff;
@@ -444,7 +560,7 @@ input[type="submit"]:hover {
     width:100%;
 }
 #live{position: relative;
-    width:990px;
+    max-width:990px;
     height: 600px;
     background-color: rgb(97, 118, 139);
     border: 1px solid rgb(22, 22, 22); /* Ensure the border is applied */
@@ -457,21 +573,8 @@ input[type="submit"]:hover {
 .video-feed {
     width: 100%;
      height: 100%;
-}
+} 
 
-.area-setup{
-margin-top:100px;s
-margin-left:235px;
-}  
-#parkingCanvas {
-    width: 1100px;
-    height: 720px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 1;
-    z-index: 700;
-}
 
 .entry2{
     grid-area: content;
@@ -479,79 +582,171 @@ margin-left:235px;
     display: block;
     width: 100%;
     height: 100%;
-    background-color: #bda1ff;
+    background-color: #faf8ff;
 
 }
 
 
 /* styles.css */
 
-.history_clas {
-    padding: 2px;
-    width: 100%;
-    height: 100%;
+/*________________________________________________ after login profile setting dropdown -------------------------------------------------------------------*/
+
+
+  .profile-view {
+    font-size: 14px;
+  }
+  #dropdown-profile,#profileImg{
+    display:flex;
+   align-items: center;
+   padding: 5px;
+   cursor: pointer;
+   margin-right: 5px;
+  }
+  #profileImg:hover{
+  transform: scale(1.1);
+  }
+  #dropdown-profile h5{
+    margin-left: 10px;
+  }
+
+  .profile-container{
+    position: relative;
+  display: inline-block;
+  z-index: 1200;
+   
+}
+
+.profile-img {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.profile-img img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-color: #0a0a0a;
+}
+
+.profile-name {
+  margin-left: 7px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 41px; 
+  right: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.164);
+  z-index: 1002;
+  width: 150px;
+  border-radius: 10px;
+  
+}
+
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f1f1f1;
+}
+.toggle-layout{
     display: flex;
-    /* Optionally remove the following line if not using CSS Grid */
-    grid-area: content;
-    background-color: #ffffff;
+    max-width: 120px;
 }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-label
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-/* Optional: Add hover effect to table rows */
-tr:hover {
-    background-color: #f0f0f0;
-}
-/* --------------------------------------- */
-.above-table select {
-    border: none;
-    outline: none; 
-    background: transparent;
-}
-.search {
-    width: max-content;
+.toggle-layout label{
+    width: 80px;
+    height: 35px;
     display: flex;
     align-items: center;
-    padding:11px;
-    border-radius: 40px;
-    background-color: #f6f6f6;
+    position: relative;
+    display: block;
+    background: #f1ebeb;
+    border-radius: 35px;  
+    box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.363);
+    cursor: pointer;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: all 0.3s ease;
 
-} 
-.searchbox{
-    margin-left: 18px;
-    magin-right:8px;
-    font-size: 17px;    
-    font-family: 'lexend',sans-serif ;
-    color: #333333 ;
-    border-radius : 1px;
-    background:transparent;
-    border:none;
-    outline:none;
-    width:250px;
+}
+.toggle-layout .slider{
+    width:30px ;
+    height: 30px;
+    border-radius: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    box-sizing: border-box;
+    background-color: #00d9ffad;
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.34);
+    top: 50%;
+    left: 0%;
+    overflow: hidden;
+    transform: translate(10%,-50%);
+    border:1px solid #000000b4;
+    transition: all 0.3s ease;
+}
+.toggle-layout input{
+    width: 0;   
+    height: 0;
+    visibility: hidden;
+}
+.toggle-layout input:checked + label .slider{
+    left: 100%;
+    transform: translate(-110%,-50%); 
+    background-color: #ddd;
+    box-shadow:-1px 0px 16px #dddddd81;
+
+}
+.toggle-layout label:active .slider{
+    width:45px;
+}
+.toggle-layout input:checked + label {
+    background:linear-gradient(rgb(218, 253, 217),rgb(69, 69, 71));
+}
+.toggle-layout input:checked + label .slider .cctv{
+    opacity: 0;
+ margin-top: 80px;
+}
+.toggle-layout input:checked + label .slider .layoutt{
+    margin-top: 0%;
+    opacity: 1;
+}
+
+.toggle-layout label img{
+   max-width: 27px;
+    height: 27px;
+    position: absolute;  
+    
     
 }
-.above-table{
-    display: flex;
-    background-color: #e5e7e9;
-    justify-content: space-around;
-    align-items: center;
-    padding: 5px;
+.toggle-layout label .cctv{ 
+    margin-top: 0%;
+    opacity: 1;
+    transition: all 0.3s ease
 }
-.showentry{
-   display: flex;
-   align-items: center;
+.toggle-layout label .layoutt{
+    margin-top: -60px; 
+    opacity: 0; 
+    transition: all 0.3s ease
+}
+#video-stream{
+    width: 80%;
+    height:auto;
 }

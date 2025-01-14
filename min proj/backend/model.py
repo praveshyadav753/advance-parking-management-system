@@ -5,7 +5,7 @@ import pathlib
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath 
 
-model_path = r"backend/best.pt"  
+model_path = r"best.pt"  
 
 def load_model():
    # model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)

@@ -13,6 +13,34 @@ close.addEventListener('click', () => {
     wrapper.classList.remove('active-popup'); // Hide the popup
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const formData = new FormData(this); // Create a FormData object from the form
+
+        fetch('/login', {
+            method: 'POST',
+            body: new URLSearchParams(formData), // Send the form data in the request body
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded' // Set the request header
+            }
+        })
+        .then(response => response.json()) // Parse the JSON response
+        .then(data => {
+            if (data.success) {
+                alert('Login successful'); // Display a success message
+                window.location.href = '/main-content'; // Redirect to the main content page
+            } else {
+                alert('Login failed: ' + data.message); // Display an error message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Request failed'); // Display a generic error message
+        });
+    });
+});
 
 //=================================================================================
 // Get the video element
@@ -26,185 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //...................................x.........x............x.........x...........x............x.........x...........x
-
-
-// /////////////////////////////////////////////
-// document.addEventListener('DOMContentLoaded', () => {
-//     const sections = {
-//         home: document.getElementById('above-parking'),
-//         setup: document.getElementById('setup1'), // Updated to match your setup section ID
-//         history: document.getElementById('history1') // Assuming you add a section with id="history"
-//     };
-
-//     // Function to hide all sections
-//     const hideAllSections = () => {
-//         Object.values(sections).forEach(section => {
-//             if (section) section.style.display = 'none';
-//         });
-//     };
-
-//     // Initially hide all and show home
-//     hideAllSections();
-//     if (sections.home) sections.home.style.display = 'block';
-
-//     // Setup navigation links
-//     const links = document.querySelectorAll('.menu ul li a');
-//     links.forEach(link => {
-//         link.addEventListener('click', (event) => {
-//             event.preventDefault();
-//             const selectedSection = sections[link.id];
-//             if (selectedSection) {
-//                 hideAllSections();
-//                 selectedSection.style.display = 'block';
-
-//                 // Update active class for links
-//                 links.forEach(lnk => lnk.classList.remove('active'));
-//                 link.classList.add('active');
-//             }
-//         });
-//     });
-
-//     // Set 'home' as the default active link
-//     const homeLink = document.getElementById('home');
-//     if (homeLink) homeLink.classList.add('active');
-// });
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     const viewToggle = document.getElementById('viewToggle');
-//     const parkingLayout = document.getElementById('parkingLayout');
-//     const live = document.getElementById('live');
-
-//     // Function to toggle views and update button text
-//     function toggleView() {
-//         if (parkingLayout.style.display === 'none') {
-//             // If the layout is hidden, show it and update the button to offer switching to the camera
-//             parkingLayout.style.display = 'block';
-//             live.style.display = 'none';
-//             viewToggle.textContent = 'Switch to Camera';
-//         } else {
-//             // If the camera is hidden, show it and update the button to offer switching to the layout
-//             parkingLayout.style.display = 'none';
-//             live.style.display = 'block';
-//             viewToggle.textContent = 'Switch to Layout';
-//         }
-//     }
-
-//     // Initially set to show the layout and offer to switch to the camera
-//     parkingLayout.style.display = 'block';
-//     live.style.display = 'none';
-//     viewToggle.textContent = 'Switch to Camera';
-
-//     // Add event listener to toggle views on button click
-//     viewToggle.addEventListener('click', toggleView);
-// });
-
-
-
-
-
-
-
-
-
-// //------------------------------------------------------------------------------------------------------------------------------
-  
-// // Show the profile edit container
-function showProfileEditContainer() {
-    var profileEditContainer = document.getElementById('editProfileContainer');
-    profileEditContainer.classList.add('visible');
-}
-
-// Function to preview selected image after choosing a file
-function previewImage(event) {
-    var input = event.target;
-    var reader = new FileReader();
-    reader.onload = function () {
-        var dataURL = reader.result;
-        var output = document.getElementById('profilePic');
-        output.src = dataURL;
-    };
-    reader.readAsDataURL(input.files[0]);
-}
-
-// Function to trigger file input when the specific change profile photo button is clicked
-function updateProfilePhoto(event) {
-    event.stopPropagation(); // Stop the event propagation
-    document.getElementById('fileInput').click();
-}
-
-// Function to delete profile photo and set it to default
-function deleteProfilePhoto() {
-    var defaultProfilePic = "user.jpg"; // Path to your default profile picture
-    var profilePic = document.getElementById('profilePic');
-    profilePic.src = defaultProfilePic;
-    // Add logic here for server-side deletion if necessary
-}
-
-// Additional logic to hide the profile edit container when clicking outside the sidebar profile picture
-document.addEventListener('click', function(event) {
-    var editProfileContainer = document.getElementById('editProfileContainer');
-    var sidebarProfilePic = document.getElementById('sidebarProfilePic');
-    var isClickInsideSidebarProfilePic = sidebarProfilePic.contains(event.target);
-
-    
-});
-
-// Ensure you call showProfileEditContainer() only when necessary, perhaps when clicking a specific edit button
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to toggle the visibility of the edit profile container
-    document.getElementById('sidebarProfilePic').addEventListener('click', function() {
-        var editProfileContainer = document.getElementById('editProfileContainer');
-        editProfileContainer.classList.toggle('visible');
-    });
-
-    // Function to hide the edit profile container if clicked outside of it
-    document.addEventListener('click', function(event) {
-        var editProfileContainer = document.getElementById('editProfileContainer');
-        var sidebarProfilePic = document.getElementById('sidebarProfilePic');
-
-        // Checking if the click is outside the edit profile container and not on the sidebar profile pic
-        if (!editProfileContainer.contains(event.target) && !sidebarProfilePic.contains(event.target) && editProfileContainer.classList.contains('visible')) {
-            editProfileContainer.classList.remove('visible');
-        }
-    });
-
-    // Stop propagation to prevent the document click from hiding the container when clicking inside it
-    document.getElementById('editProfileContainer').addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-
-    // Function to preview and change the profile photo
-    window.previewImage = function(event) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var profilePic = document.getElementById('profilePic');
-            profilePic.src = e.target.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    };
-
-    // Function to change the profile photo by clicking the Change Photo button
-    window.updateProfilePhoto = function(event) {
-        event.stopPropagation(); // Prevent the click from closing the edit profile container
-        document.getElementById('fileInput').click();
-    };
-
-    // Function to delete the profile photo and revert it to a default one
-    window.deleteProfilePhoto = function() {
-        var defaultProfilePic = "user.jpg"; // Adjust the path to your default image
-        var profilePic = document.getElementById('profilePic');
-        profilePic.src = defaultProfilePic;
-    };
-});
-
-
-
-
-
-
-
 
 
 
@@ -227,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const gateViewSection = document.getElementById('entry1');
     const parkingLayout = document.getElementById('parkingLayout');
     const videoFeed = document.getElementById('live');
-    const viewToggle = document.getElementById('viewToggle');
+    const viewToggle = document.getElementById('viewtoggle');
 
     // Function to hide all sections
     function hideAllSections() {
@@ -244,17 +93,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Function to toggle views and update button text
+    
+
     function toggleView() {
-        if (parkingLayout.style.display === 'none') {
-            // If the layout is hidden, show it and update the button to offer switching to the camera
-            parkingLayout.style.display = 'block';
-            videoFeed.style.display = 'none';
-            viewToggle.textContent = 'Switch to Camera';
-        } else {
-            // If the camera is hidden, show it and update the button to offer switching to the layout
+        if (viewToggle.checked) {
+            // If the checkbox is checked, show the video feed and hide the parking layout
             parkingLayout.style.display = 'none';
             videoFeed.style.display = 'block';
-            viewToggle.textContent = 'Switch to Layout';
+        } else {
+            // If the checkbox is not checked, show the parking layout and hide the video feed
+            parkingLayout.style.display = 'block';
+            videoFeed.style.display = 'none';
         }
     }
 
@@ -314,3 +163,99 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+// sidebar position and width adusting ;
+
+const bar= document.getElementById('bar2');
+const sidebar=document.getElementById('sidebar-id');
+  
+    bar.onclick=function(){
+        sidebar.classList.toggle("active")
+    }
+
+    // upper div for visualization
+    const totalSpaces = 100;
+    const availableSpaces = 45;
+    
+    const ctx = document.getElementById('myChart').getContext('2d');
+    
+    const myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [availableSpaces, totalSpaces - availableSpaces],
+                backgroundColor: ['#00ff00','rgb(211,211,211)' ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '80%',  // Adjusts the size of the inner hole
+            plugins: {
+                legend: { display: true },
+                tooltip: { enabled: true },
+            },
+            responsive: false,
+            maintainAspectRatio: false,
+        },
+        plugins: [{
+            beforeDraw: function(chart) {
+                const width = chart.width,
+                    height = chart.height,
+                    ctx = chart.ctx;
+                ctx.restore();
+                const fontSize = (height / 5.2).toFixed(2); // Adjust the divisor to change the font size
+            ctx.font = `${fontSize}px Arial`;
+                ctx.fillStyle = 'rgb(255,255,255)'; 
+                ctx.textBaseline = "middle";
+    
+                const text = `${availableSpaces}/${totalSpaces}`,
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+    
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        }]
+    });
+
+    
+    const ctx1 = document.getElementById('myChart2').getContext('2d');
+    
+    const myChart2 = new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [availableSpaces, totalSpaces - availableSpaces],
+                backgroundColor: ['rgb(211,211,211)','rgb(209, 34, 34)' ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '80%',  // Adjusts the size of the inner hole
+            plugins: {
+                legend: { display: true },
+                tooltip: { enabled: true },
+            },
+            responsive: false,
+            maintainAspectRatio: false,
+        },
+        plugins: [{
+            beforeDraw: function(chart) {
+                const width = chart.width,
+                    height = chart.height,
+                    ctx1 = chart.ctx;
+                ctx1.restore();
+                const fontSize = (height / 5.2).toFixed(2); // Adjust the divisor to change the font size
+            ctx1.font = `${fontSize}px Arial`;
+                ctx1.fillStyle = 'rgb(255,255,255)'; 
+                ctx1.textBaseline = "middle";
+    
+                const text = `${totalSpaces - availableSpaces}/${totalSpaces}`,
+                    textX = Math.round((width - ctx1.measureText(text).width) / 2),
+                    textY = height / 2;
+    
+                ctx1.fillText(text, textX, textY);
+                ctx1.save();
+            }
+        }]
+    });

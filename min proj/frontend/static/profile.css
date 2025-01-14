@@ -1,0 +1,221 @@
+/* 
+for id : #
+for class: .
+for  element : element name  exapmle= p
+for attribute select:  [attribute], [attribute=value]   
+Pseudo-Class Selector:   syntax: :pseudo-class    example = a:hover { color: red; }  for specific state */
+*
+{
+    padding: 0px;
+    margin:0px;
+}
+#profileOverlay.show {
+    display: block; 
+    opacity: 1;     
+}
+.overlay{
+    z-index: 3000;
+    width:fit-content;
+    height:fit-content;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    
+    backdrop-filter:blur(10px);
+    display: none;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,.5);
+    box-shadow: 9px 9px 30px rgba(0, 0, 0, 0.5);
+}
+.profile-account {
+    padding: 40px;
+    overflow: hidden;
+    display: grid;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 8px;
+    box-sizing:content-box;
+    box-shadow: 9px 9px 30px rgba(0, 0, 0, 0.5);
+    
+    
+}
+.side-left{
+    background-color: rgb(255, 255, 255) ;
+    box-shadow: 2px 0px  14px rgba(60, 21, 133, 0.308);
+    width: 210px;
+    height: 450px;
+    position: fixed;
+    border-radius: 9px;  
+    background: transparent;
+}
+.io{
+    background-color: aliceblue;
+}
+.content-profile{
+    width: 500px;
+    height: 450px;
+    position: relative;
+    margin-left:220px;
+    padding:10px;
+    border-radius: 9px;
+    display: block;
+    align-items: center;
+    background-color: aliceblue;
+    box-shadow: 9px 9px 6px rgba(60, 21, 133, 0.308)                                                                                                                                                                                                                                                                                                                              ;
+}
+
+.account-header h3{
+    padding-left:10px;
+    height:2.4rem;
+    margin-bottom: 9px;
+    font-size: 1.2em;
+    color: rgba(0, 0, 0, 0.603);
+    
+}
+.menu-profile ul{
+    list-style: none;
+    padding: 0px;
+}
+.menu-profile  li a{
+    display: block;
+    padding:15px;
+    color: rgb(0, 0, 0);
+    margin: 5px 0px 0px 2px;
+    text-decoration:none;
+    transition: transform 0.2s;
+    
+}
+.menu-profile ul li a:hover{
+    background-color: #0887c2;
+    color: rgb(255, 255, 255);
+   border-radius: 1px;
+}
+.user-img{
+    justify-items: center;
+    display: grid;
+    background-color: aliceblue;
+    border-radius: 9px;
+    padding: 12px;
+}
+.user-img img:hover{
+    border: 2px solid rgb(209, 34, 34);
+
+}
+.user-img img{
+    border-radius: 50%;
+    width:80px;
+    height:80px;
+    cursor: pointer;
+    border: 2px solid white;
+    
+    
+}
+
+
+.form-group{
+     display: flex;
+     align-items: center;
+     justify-items: center;
+     padding:10px;
+     margin-bottom: 12px;
+     background-color: rgb(215, 234, 250);
+     border-radius: 20px;
+
+} 
+
+.form-group select{
+
+    border: none;
+    outline:none;
+    background-color: transparent;
+}
+.form-group .icon{
+    padding-right:9px;
+}
+
+ .profile-account label {
+    
+    display: block;
+    padding: 0.4em;
+    pointer-events: none;
+    color: #060606;
+    font-size:1em;
+    font-weight: 500;
+    
+    
+} 
+
+.content-profile input {
+    
+    padding: 2px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-bottom:0px solid #14141479;
+    background-color: transparent;
+    margin-left: 5px;
+    font-size: 1em;
+    color: #140909;
+    font-weight: 300;
+   
+
+} 
+
+#userId {
+    width:4rem;
+    border:none;
+}
+.btn-pro{
+    display: flex;
+    margin: 5px;
+}
+ .btn-pro input[type=button],input[type=submit]{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin: 3px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-pro input:hover {
+    background-color: #00b31e;
+    border:.1em solid rgb(235, 225, 225);
+} 
+
+.tick {
+    display: flex;
+
+}
+.tick span{
+    padding:0.4em;
+}
+.two-factor{
+    padding: 10px;
+}
+.login-alerts{
+    padding: 10px;
+}
+.login-activity{
+    padding: 10px;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+
+  /*-------------------------------------------------*/
+  #maincontent.fade-out1{
+    filter: blur(20px);
+  }

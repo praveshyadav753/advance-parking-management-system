@@ -5,11 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='setup.css') }}">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha384-ABUMow7Wzn74ZNldW6tL4diXirOgjBz+cWh3Fb7a31FlabrtGieOV7J7kDsb0l3v" crossorigin="anonymous"></script>
+
 
 
         <!-- <link rel="stylesheet" href="styletry.css"> -->
@@ -17,37 +20,110 @@
     <title>ParkIT</title>
 </head>
 <body>
-    <header class="horizontal-header">
-        <a href="index.html">
-            <img src="static/LOGO3.png" alt="Website Logo">
-        </a>
-        <div class="login">
-            <a href="#" class="login-icon"> <i class="fa-solid fa-user"></i></a>
-        </div>
+    
         
-    </header>
-        
-    <div class="sidebar">
-        <div class="profile-photo" style="cursor: pointer;">
-            <img src="static/user.jpg"  alt="Profile Photo" id="sidebarProfilePic" style="width: 75px; height:75px ; border-radius: 50%; display: block; margin: 20px auto 20px;">
-               
-           
+    
+     <!-- dropdown for profile -->
+
+    <div class="dropdown-menu" id="dropdownMenu">
+            <div class="profile-view" id="dropdown-profile">
+                <img src="/static/user.jpg" alt="user">
+                Pravesh yadav
+            </div>
+            <hr style=" width:95% ; margin:0 auto">
+            <a href="#" id="toggleProfile"><i class="fa-regular fa-user"></i> Account Settings</a>
+            <a href="#"><i class="fa-solid fa-right-from-bracket"></i>
+                Logout</a>
         </div>
+    </div>
+  
+    <div class="sidebar" id="sidebar-id">
+        <span class="bar" id="bar2">
+            <i class="fa-solid fa-bars fa-lg" id="bar1"></i>
+        </span>
+
+    
+            <div class="profile">
+                <img src="static/user.jpg" title="Profile" alt="Profile Photo" id="sidebarProfilePic">
+                <h2 id="userName">Sandeep Sharma</h2> <!-- Replace with dynamic content  -->
+            </div>
+       
             
         <nav class="menu">
             <ul>
-                <li><a href="#above-parking" id="home"><i class="fa-solid fa-house fa-beat"></i>Home</a></li>
-                <li><a href="#setup1" id="setup"><i class="fa-solid fa-gear"></i>Setup</a></li>
-                <li><a href="#history1" id="history"><i class="fa-solid fa-clock-rotate-left"></i></i>History</a></li>
-                <li><a href="#entry" id="entry2">Gate view</a></li>
-
-
+                <li class="navigation-class">
+                    <a href="#above-parking" id="home">
+                        <i class="fa-solid fa-house"></i>
+                    <span class="navigation-name">Home</span>
+                    </a>
+                    <span class="tooltip">Home</span>
+                </li>
+                <li class="navigation-class">
+                    <a href="#deshboard" id="deshboard">
+                        <i class="fa-solid fa-palette"></i>
+                    <span class="navigation-name">Dashboard</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span>
+                </li>
+                <li class="navigation-class">
+                    <a href="#setup1" id="setup">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="navigation-name">Setup</span>
+                    </a>
+                    <span class="tooltip">Setup</span>
+                </li>
+                <li class="navigation-class" onclick={}>
+                    <a href="#history1" id="history">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    
+                        <span class="navigation-name">History </span>
+                    </a>
+                    <span class="tooltip">History</span>
+                </li>
+                <li class="navigation-class">
+                    <a href="#entry" id="entry2">
+                        <i class="fa-solid fa-camera"></i> 
+                        <span class="navigation-name">Gate-View</span>
+                    </a>
+                    <span class="tooltip">Gate-view</span>
+                </li>
             </ul>
-            
+                <div class="nav-logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="navigation-name">Logout</span>
+                </div>  
         </nav>
     </div>
 
-    <main class="content-area"> 
+    <!--horizontal header --> 
+    <div class="horizontal-header">
+        <div class="logo-bar">
+             <a href="#above-parking">
+                 <img src="static/LOGO.png" alt="Website Logo">
+             </a>
+         
+             
+         </div> 
+        <div class="header-right">
+            <div class="notification-bell" noti-count="1">
+                <i class="fa-solid fa-bell" ></i>
+            </div>    
+            <div class="login-main">
+                    
+                <div class="login">
+                    <a href="#" class="login-icon"> <i class="fa-solid fa-user"></i></a>
+                </div>
+
+                <div class="profile-view" id="profileImg">
+                    <img src="/static/user.jpg" alt="Profile Picture">
+                    
+                </div>
+        
+            </div>
+        </div>     
+     </div>
+
+    <main class="content-area" id="maincontent"> 
 
         <div class="wrapper">
             <span class="close">
@@ -77,157 +153,173 @@
 
             </div>
         </div>
-        <div class="container" id="editProfileContainer">
-            <h2>User Profile</h2>
-            <div class="profile-section">
         
-                <div class="profile-picture">
-                    <img id="profilePic" src="frontend/static/user.jpg"  alt="profile">
-                </div>
-                
-                <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)" hidden>
-                <button onclick="updateProfilePhoto(event)" style="background-color:rgb(47, 47, 56) ; padding:3px">Change Photo</button>
-
-                <button onclick="deleteProfilePhoto()" style="background-color:rgb(47, 47, 56) ; padding:3px">Delete Photo</button>
-            </div>
-            <form action="/update_profile" method="post">
-                <div class="form-group">
-                    <label for="userID">User ID:</label>
-                    <input type="text" id="userID" name="userID" value="12345" readonly>
-                </div>
-    
-                <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="phone" width: 100px;>Phone Number:</label>
-                    <div class="phone-input" style="display: inline-block;">
-                        <select id="countryCode" name="countryCode" style="width: calc(50% - 45px); height:35px">
-                            <option value="+91">+91 (INDIA)</option>
-                            <option value="+1">+1 (USA)</option>
-                            <option value="+44">+44 (UK)</option>
-                            <option value="+61">+61 (AUS)</option>
-                            <option value="+55">+55 (BRAZIL)</option>       
-                        </select>
-                        <input type="tel" id="phone" name="phone" maxlength="10" placeholder="Enter your phone number" required style="width: 180px; height: 30px;">
+      <!-- for ticket form -->
+        <div class="home-popup" id="home-popup1">
+            <span class="close-w">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+            <div class="from-div">
+                <h2>Parking Ticket Form</h2>
+                <form action="#" id="ticketForm">
+                    <div class="input-box1">
+                        <img src="/static/numberplate_icon.jpg" height:50px; width:50px; >
+                        <label for="vehicleNumber">Vehicle Number:</label>
+                        <input type="text" id="vehicleNumber" name="vehicleNumber" required>
                     </div>
-                </div>
-                
-                <hr>
-    
-                <h3>Change Password</h3>
-    
-                <div class="form-group">
-                    <label for="currentPassword">Current Password:</label>
-                    <input type="password" id="currentPassword" name="currentPassword" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="newPassword">New Password:</label>
-                    <input type="password" id="newPassword" name="newPassword" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm New Password:</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
-                </div>
-    
-                <input type="submit" value="Update Profile" class="btn">
-            </form>
-        </div>
-      <!-- for home -->
-      <div class="home-popup" id="home-popup1">
-        <div class="from-div">
-            <h2>Parking Ticket Form</h2>
-            <form action="#" id="ticketForm">
-                <div class="input-box">
-                    <img src="/frontend/static/numberplate_icon.jpg" height:50px; width:50px; >
-                    <label for="vehicleNumber">Vehicle Number:</label>
-                    <input type="text" id="vehicleNumber" name="vehicleNumber" required>
-                </div>
-                <div class="inputww">
-                    <div class="input-box">
-                        <i class="fa-solid fa-square-parking" id="icon1"></i>
-                        <label for="assignedSlot">Assigned Slot:</label>
-                        
-                        <input type="text" id="assignedSlot" name="assignedSlot" readonly>
-                    </div>
-                    <div class="input-box">
-                        
-                        <label for="mobileNumber  ">Mobile Number</label>
-                        <i class="fa-solid fa-phone-volume" id="icon1"></i>
-                        <input type="tel" id="mobileNumber" name="mobileNumber" maxlength="10" placeholder="9828986795">
-                    </div>
-                </div>    
-                <div class="input-box">
-                    <i class="fa-solid fa-id-card" id="icon1"></i>
-                    <label for="ownersName">Owner's Name:</label>
-                    
-                    <input type="text" id="ownersName" name="ownersName" placeholder="Kelvin">
-                </div>
-                <div class="inputww">
-                    <div class="input-box">
-                        <i class="fa-regular fa-calendar" id="icon1"></i>
-                        <label for="date">Date:</label>
-                        <input type="text" id="date" name="date" readonly>
-                    </div>
-                    <div class="input-box adjust">
-                        <i class="fa-solid fa-clock" id="icon1"></i>
-                        <label for="time">Time:</label>
-                        <input type="text" id="time" name="time" readonly>
+                    <div class="inputww">
+                        <div class="input-box1">
+                            <i class="fa-solid fa-square-parking" id="icon1"></i>
+                            <label for="assignedSlot">Assigned Slot:</label>
+                            
+                            <input type="text" id="assignedSlot" name="assignedSlot" readonly>
+                        </div>
+                        <div class="input-box1">
+                            
+                            <label for="mobileNumber  ">Mobile Number</label>
+                            <i class="fa-solid fa-phone-volume" id="icon1"></i>
+                            <input type="tel" id="mobileNumber" pattern="[0-9]{10}" title="Only numbers are allowed" name="mobileNumber" maxlength="10" placeholder="9828986795">
+                        </div>
                     </div>    
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+                    <div class="input-box1">
+                        <i class="fa-solid fa-id-card" id="icon1"></i>
+                        <label for="ownersName">Owner's Name:</label>
+                        
+                        <input type="text" id="ownersName" name="ownersName" placeholder="Shreyash">
+                    </div>
+                    <div class="inputww">
+                        <div class="input-box1">
+                            <i class="fa-regular fa-calendar" id="icon1"></i>
+                            <label for="date">Date:</label>
+                            <input type="date" id="date" name="date" readonly>
+                        </div>
+                        <div class="input-box1 adjust">
+                            <i class="fa-solid fa-clock" id="icon1"></i>
+                            <label for="time">Time:</label>
+                            <input type="time"  id="time" name="time" readonly>
+                        </div>    
+                        <div class="vehicle">
+                            <label for="vehicleType"><strong>vehicle Type:</strong></label>
+                            <label>car</label>
+                            <input type="radio" id="car" name="vehicleType" value="car" checked>
+                            <label>bike</label>
+                            <input type="radio" id="bike" name="vehicleType"value="bike">
+                        </div>    
+                    </div>
+                    <button type="button" id="viewTicketButton">View Ticket</button>
+                    <button type="button" id="printTicketButton">Print Ticket</button>
+                </form>
+            </div>
         </div>
-    </div>
-  
         
-     <!-- for home -->
-        <div id ="above-parking" class="above-parking-layout">
-          <div class="home-head">  
-            <h1>Home</h1>  
-          </div>
-          <button id="viewToggle" class="view-toggle">Show Camera</button> 
-          <button id="popupbtn" class="show-ticket"> Show ticket </button> 
-          <div id="parkingLayout" class="parking-layout"></div> 
-          <div id="live" class="live-feed"> 
-            <img src="/video" class="video-feed">
-          </div>
-          
-        </div>   
+        <!-- dynamic insertion of ticket-->
+        <div id='ticketprnt' class="ticketprint">
+            
+            
+            
+        </div>
+    
+            
+        <!-- for home -->
+            <div id ="above-parking" class="above-parking-layout">
+            <div class="home-head">  
+                <h1>Home</h1>  
+            </div>
+            <div class="home-space"> 
+                <div class="space-available"> 
+                   <canvas id="myChart"></canvas>
+                   
+                   <div class="space-info">
+                    <h3>Space Available</h3>
+                        <ul>
+                            <li><span class="total-space-indicator"></span> total space</li>
+                            <li><span class="available-space-indicator"></span> available</li>
+                        </ul>
+                    </div>
+                   <img src="/static/car_available.svg">
+                </div>
+
+                <div class="space-occupied">
+                    <canvas id="myChart2"></canvas>
+                   
+                    <div class="space-info">
+                     <h3>Space occupied</h3>
+                         <ul>
+                             <li><span class="total-space-indicator"></span> total space</li>
+                             <li><span class="occupied-space-indicator"></span>occupied</li>
+                         </ul>
+                     </div>
+                <img src="/static/car_notavailable.svg">
+                </div>
+            </div>
+            <button id="popupbtn" class="show-ticket"> Ticket </button> 
+            <div class="layout-live">
+                <div class="toggle-layout">
+                    <input  type="checkbox" id="viewtoggle">
+                    <label for="viewtoggle" class="toggle-button">
+                        <div class="slider">
+                            <img src="/static/toogle-icon/cctv5.svg" class="cctv">
+                            <img src="/static/toogle-icon/car-gate.svg" class="layoutt">
+                        </div> 
+                    </label>    
+                </div>
+                <div id="parkingLayout" class="parking-layout"></div> 
+                <div id="live" class="live-feed"> 
+                    <img src="/video" class="video-feed">
+                </div>
+            </div>    
+            
+            </div>   
         <!-- for setup -->
         <div class="setup" id="setup1">
                 
             <div class="home-head">
                 <h1>Setup Parking Areas</h1>
             </div>
-            <div class="area-setup"style="position: relative;">
+            <div class="upper-select-container">
+                <select id="dropdown1" name="dropdown-area" class="dropdown-area">
+                  <option value="area 1" name="dropdown-area">Area 1</option>
+                  <option value="area 2" name="dropdown-area">Area 2</option>
+                  <option value="area 3" name="dropdown-area" >Area 3</option>
+                  <option value="area 4" name="dropdown-area">Area 4</option>
+                  <option value="area 5" name="dropdown-area">Area 5</option>  
+                </select>
+            </div>    
+                <div class="tools-container" id="draggable">
+                    <div class="tools" id="cursor">
+                        <i class="fa-solid fa-arrow-pointer"></i>
+                    </div>    
+                    <div class="tools" id="hand-tool">
+                        <i class="fa-solid fa-hand"></i>
+                    </div>  
+                    <div class="tools" id="pen-tool">
+                        <i class="fa-solid fa-pen"></i>
+                    </div>  
+                    <div class="tools" id="vector-pen">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>  
+                    <div  class="tools" id="delete-tool">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>  
+                </div>  
+            <div class="area-setup" id="canvas_area">
                 <img id="liveFrame"   src="/frame" alt="Live Parking Frame">
                 <canvas id="parkingCanvas" style="position: absolute;"></canvas>
             </div> 
         </div> 
-        <!-- for history -->
+        <!-- for history  show for today tommarow and all ,,,,,,and sort by id and what parameter--> 
+        
+
         <div id="history1" class="history_clas"> 
+            <div id="history2">
             <div class="home-head">  
                 <h1>Parking History</h1>  
             </div> 
             <div class="above-table "> 
                     <div class="showentry">
                         <label for="entries">Show entries:</label>
-                        <select id="entries" onchange="changeEntries()">
+                        <select id="entries" >
+                            <option value="all">All</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
@@ -238,19 +330,27 @@
                     
                     <div id="sortOptions">
                         <select id="sort">
+                            
                             <option disabled selected>Sort By</option>
                             <option value="slot">Slot</option>
                             <option value="vehicleNumber">Vehicle Number</option>
                             <option value="date">Date</option>
+                            <option value="s_number">S.Number</option>
                         </select>
                     </div> 
                     <form action="/search"  class="search" method="post">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" name="query" class="searchbox" placeholder="Search by ID, Vehicle Number, Owner Name">
+                        <input type="search" name="query" class="searchbox" placeholder="Search by ID, Vehicle Number, Owner Name">
                 
                     </form>
+                    <div class="filter12">
+                        
+                          <img src="/static/filter.png" id="filterLink" width="30" height="30" title="Filter">
+                    </div>      
+                           
+
             </div> 
-            
+            <!-- table to show the entry of the database -->
             <table>
                 <thead>
                     <tr>
@@ -268,22 +368,267 @@
                     <!-- Table rows will be dynamically added here -->
                 </tbody>
             </table>
+
+        </div>
+        
+            <!-- filter for table of history-->
+            <div class="filter-box" id="filter" name="filter1"> 
+                <span class="close-w" id="closeFilter">
+                    <i class="fa-solid fa-xmark" id="closeFil"></i>
+                </span>
+                <section class="search-filter">
+                <div id="headingf" style="text-align: center; font-size:22px" >    
+                <strong >Filter Data</strong> 
+                </div>
+                    <form id="filterForm" action="/search" method="post">
+                            <details>
+                                <summary>dates</summary>
+                                <div class="dates" id="dates">
+                                    <div class="filter-group">
+                                        <label for="startDate">Start Date:</label>
+                                        <input type="date" id="startDate" name="startDate">
+                                    </div>
+                                    <div class="filter-group">
+                                        <label for="endDate">End Date:</label>
+                                        <input type="date" id="endDate" name="endDate">
+                                    </div>
+                                </div>
+                           </details>
+                           <details>
+                            <summary>slot</summary>
+                                <div class="filter-group">
+                                    <label for="slotNumber">Slot Number:</label>
+                                    <input type="text" id="slotNumber"  placeholder="32" title="Example:A23" name="slotNumber">
+                                </div> 
+                            </details>    
+                        
+                  <!--  pattern="[A-z]{1}[1-9]{1,1000}" -->
+                  <details>
+                    <summary>vehicle Type</summary>
+                        <div class="filter-group">
+                            <label for="vehicleType">Vehicle Type:</label>
+                            <select id="vehicleType" name="vehicleType" >
+                                <option value="" >-- Select Vehicle Type --</option >
+                                <option value="car">Car</option>
+                                <option value="motorcycle">Motorcycle</option>
+                            </select>
+                        </div>
+                    </details>    
+                    <details>
+                        <summary>Payment</summary>
+                        <div class="filter-group">
+                            <label for="paymentStatus">Payment Status:</label>
+                            <select id="paymentStatus" name="paymentStatus">
+                                <option value="">-- Select Payment Status --</option>
+                                <option value="paid">Paid</option>
+                                <option value="pending">Pending</option>
+                                <option value="overdue">Overdue</option>
+                            </select>
+                            
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Entry Time</summary>
+                        <div class="filter-group">
+                            <label for="entrytime">Entry Time:</label>
+                            <input type="time" name="entrytime" id="entrytime">
+                        </div>
+                    </details>    
+                    <details>
+                        <summary>Exit Time</summary>
+                        <div class="filter-group">
+                            <label for="exittime">Exit Time:</label>
+                            <input type="time" name="exittime" id="exittime">
+                        </div>
+                    </details>    
+            
+                        <button type="button" id="apply_filter">Apply Filters</button>
+                    </form>
+                </section>  
+            </div>
+              
+            
         </div>
         
         <!-- for entry view -->
         <div id="entry1" class="entry2"> 
             <h1>plate detection</h1> 
-            <img id="gate-view" src="" alt="entry gate">
+            <img id="video-stream" width="100%" alt="Live Video Stream" />
+            <div id="parking-data"></div>
     
         </div>
 
-    </main>  
-    <script src="{{ url_for('static', filename='login.js') }}"></script>
+    </main> 
+    <div class="overlay" id="profileOverlay">
+        <span class="close-w" id="closeaccount">
+            <i class="fa-solid fa-xmark" id="closeFil"></i>
+        </span>
+        <div class="profile-account " > 
+           <div class="side-left">
+       
+               <div class="user-img">
+                   <img src="/static/user.jpg" alt="image">
+                    <h3 id="userName">Pravesh yadav</h3> 
+               </div>
+               <div class="menu-profile">
+                   <ul>
+                       
+                       <div class="io">        
+                           <li><a href=""> Account</a></li>
+                            
+                       </div>
+                           
+                       <div class="io">
+                            <li><a href="">Password</a></li>
+                           
+                       </div>
+                       <div class="io">    
+                           <li><a href="">Security</a></li>
+                       </div>    
+                   </ul>
+               </div>
+           </div> 
+           <div class="content-profile">
+                 
+               <div class="account">
+                   <div class="account-header">
+                       <h3>Account details</h3>
+                   </div> 
+                   <form action="/update_profile" method="post">
+                      <div class="form-group "id="user-id">
+                           <span class="icon"><i class="fa-regular fa-user"></i></span>
+                           <label for="userID">User ID:</label>
+                           <input type="text" id="userID" name="userID" value="12345" readonly>
+           
+                       </div>
+                       
+                       
+                       <div class="name"> 
+                           <div class="form-group">
+                               <label for="firstName">First Name:</label>
+                               <input type="text" id="firstName" name="firstName" required>
+                           </div>
+                       
+           
+                           <div class="form-group">
+                               <label for="lastName">Last Name:</label>
+                               <input type="text" id="lastName" name="lastName" required>
+                           </div>
+                           
+                       </div>
+                      <div class="form-group">
+                               <span><i class="fa-solid fa-envelope"></i></span>
+                               <label for="email">Email:</label>
+                               <input type="email" id="email" name="email" required>
+                       </div>
+                      
+           
+                       <div class="form-group">
+                           <label for="phone" width: 70px;>Phone Number:</label>
+                           <div class="phone-input" style="display: flex;">
+                               <select id="countryCode" name="countryCode" style="width: calc(50% - 45px); height:35px">
+                                   <option value="+91">+91 (INDIA)</option>
+                                   <option value="+1">+1 (USA)</option>
+                                   <option value="+44">+44 (UK)</option>
+                                   <option value="+61">+61 (AUS)</option>
+                                   <option value="+55">+55 (BRAZIL)</option>       
+                               </select>
+                               <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" placeholder="Enter phone number" required style="width: 180px; height: 30px;">
+                           </div>
+                       </div>
+                       
+                       <div class="btn-pro">
+                           <input type="submit" value="Update" >
+                           <input type="button" value="Cancel" >
+                        </div>
+                   </form>    
+       
+               </div>
+       
+               <div class="pass-profile">
+                   
+                   <div class="password-profile">
+                      <div class="account-header">
+                       <h3>Change Password</h3>
+                   </div> 
+                   
+           
+                       <div class="form-group">
+                           <label for="currentPassword">Current Password:</label>
+                           <input type="password" id="currentPassword" name="currentPassword" required>
+                       </div>
+                       <hr>
+           
+                       <div class="form-group">
+                           <label for="newPassword">New Password:</label>
+                           <input type="password" id="newPassword" name="newPassword" required>
+                       </div>
+                       <hr>
+           
+                       <div class="form-group">
+                           <label for="confirmPassword">Confirm New Password:</label>
+                           <input type="password" id="confirmPassword" name="confirmPassword" required>
+                       </div>
+       
+                       <hr>
+                       <div class="forgot-pass">
+                           <a href="#">Forgot Password?</a>
+                       </div>
+                       <div class="btn-pro">
+                           <input type="submit" value="Update" class="btn-pro">
+                           <input type="button" value="Cancel" class="btn-pro">
+                       </div>
+                   </form>
+               </div>    
+           </div>
+           <div class="security">
+               <div class="account-header">
+                   <h3>Security & Privacy</h3>
+               </div> 
+               <div class="two-factor">
+                   <h4>Two-Factor Authentication</h4>
+                   <div class="tick">
+                       <input type="checkbox" id="twofactor" name="twofactor">
+                       <label for="twofactor"> Two-Factor Authentication</label>
+                   </div>
+               </div>
+               <hr>
+               
+               <div class="login-alerts">
+                   <h4>login alert</h4>
+                   <div class="tick">  
+                       <label for="login-alert">In app notification</label>
+                       <input type="checkbox" name="login-alert">
+                   </div>  
+                   <div class="tick" id="inmail">
+                       
+                       <span><i class="fa-solid fa-envelope"></i> Email</span>
+                       <input type="checkbox" name="via-male" id="via-mail">
+                       
+                   </div>
+               </div>
+               <hr>
+               <div class="login-activity">
+                   <h4>login activity </h4>                  
+               </div>
+               
+           </div>
+          
+       </div> 
+   
+
+       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+       <script type="module" src="{{ url_for('static', filename='gateview.js') }}"></script>
+       <script src="{{ url_for('static', filename='login.js') }}"></script>
     <script src="{{ url_for('static', filename='script1.js') }}"></script>
     <script src="{{ url_for('static', filename='setup.js') }}"></script>
     <script src="{{ url_for('static', filename='history.js') }}"></script>
-    <script src="{{ url_for('static', filename='gate_view.js') }}"></script>
-    <script src="{{ url_for('static', filename='popup.js') }}"></script>
+    <script src="{{ url_for('static', filename='ticket.js') }}"></script>
+   <script type="module" src="{{ url_for('static', filename='popupticket.js') }}"></script>
+    <script src="{{ url_for('static', filename='profile.js') }}"></script> 
+    
+    
+
 
 
 </body>

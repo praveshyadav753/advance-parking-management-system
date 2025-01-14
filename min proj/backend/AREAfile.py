@@ -1,7 +1,7 @@
 import json
 
 # File to store parking area data
-file_name = 'parking_areas.json'
+file_name = '../parking_areas.json'
 
 def load_parking_areas():
     try:

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Ticket Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+
+
+        .ticketprint {
+            width: 300px;
+            margin: ss0px auto;
+            background-color: #fff;
+            border: 5px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            display:block;
+            transform: scale(0);
+            transition: transform .3s ease, height .2s ease;
+            z-index: 2000;
+        }
+        .ticketprint.visible1{
+            transform: scale(1);
+            
+        }
+        
+        .ticket:hover {
+            transform: translateY(-5px);
+        }
+        
+        .ticket-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .ticket-details {
+            margin-bottom: 20px;
+        }
+        
+        .payment-details {
+            background-color: rgb(169, 155, 155);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .details-label {
+            font-weight: bold;
+        }
+        
+        h2, h3 {
+            color: #333;
+        }
+        
+        p {
+            margin: 0 0 10px;
+        }
+        
+        .barcode img {
+            /* width: 100px;
+            height: 100px; */
+        
+                width: 200px; 
+                height: 100px;
+                display: block;
+                margin: 0 auto;
+        
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .barcode img:hover {
+            transform: scale(1.1);
+        }
+        
+        .logo {
+            margin-right: 10px;
+        }
+        
+        .logo img {
+            max-width: 100px; 
+            max-height: 100px; 
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .home-popup {
+            position: fixed;
+            width: 850px;
+            height: 570px;
+            top: 60px;
+            left: 18%;
+            background: white;
+            border: 2px solid rgba(255, 255, 255, .5);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+            display: block;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transform: scale(0);
+            transition: transform .3s ease, height .2s ease;
+            z-index: 1000;
+            padding: 10px;
+        }
+        
+        .home-popup.visible {
+            transform: scale(1);
+            
+        }
+        .close-w{
+            position: absolute;
+            top: 0;
+            right: 0 ;
+            width: 45px;
+            height: 45px;
+            background: #141414;
+            font-size:2em ;
+            color: #fff;
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+           border-bottom-left-radius: 19px;
+           
+        }
+        
+        .from-div {
+            padding: 30px;
+        
+        }
+        
+        .home-popup.form-div {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .from-div h2 {
+            font-size: 2em;
+            color: rgba(0, 0, 0, 0.641);
+            text-align: center;
+        }
+        
+        
+        .input-box {
+            display: flex;
+            align-items: center;
+            width: auto;
+            height: 50px;
+            margin: 20px;
+            border-bottom: 2px solid #0b141b;
+        }
+        .input-box.adjust {
+            margin-left:40px;
+        }
+        
+        .input-box label {
+
+            font-size: 1em;
+            color: #060606;
+            font-weight: 500;
+            
+        }
+        
+        .input-box input[type="text"],input[type="tel"]
+         {
+            flex: 3;
+            padding: 8px;
+            box-sizing: border-box;
+            border: none;
+            outline:none;
+            font-size: 1em;
+            color: #060606;
+        }
+        .inputww{
+            display:flex;
+            
+        }
+        .input-box img{
+            width:23px;
+            height:23px;
+            margin-right:3px;
+        }
+        #icon1{
+            margin-left:4px;
+            margin-right:3px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button id="popupbtn" class="show-ticket"> Show ticket </button>
+    <div id='ticketprnt' class="ticketprint">
+        <div class="ticket-header">
+            <div class="logo">
+                <img src="/frontend/static/logo.jpg" alt="Logo">
+            </div>
+            <h1>Parking Ticket</h1>
+            <!-- <h2>Parking Ticket</h2> -->
+        </div>
+        <div class="ticket-details">
+            <p><span class="details-label">City:</span> Indore</p>
+            <p><span class="details-label">State:</span> Madhya pradesh</p>
+            <p><span class="details-label">Zip Code:</span> 452010</p>
+            <p><span class="details-label">Contact:</span> 1900-1898-9989</p>
+            <p><span class="details-label">Ticket ID:</span> Id</p>
+            <p><span class="details-label">Date/Time Issued:</span>  05/06/2024 12:00 pm</p>
+            <p><span class="details-label">Vehicle Plate:</span> vehicleNumber</p>
+            <p><span class="details-label">Slot:</span> A-13 </p>
+        </div>
+        <div class="payment-details">
+            <h3>Payment Details:</h3>
+            <p><span class="details-label">Payment:</span> Rs. 60</p>
+            
+        </div>
+        <div class="barcode">
+            <img src="/frontend/static/barcode.jpg" alt="Barcode">
+        </div>
+    </div>
+
+    <div class="home-popup" id="home-popup1">
+        <span class="close-w">
+            <i class="fa-solid fa-xmark"></i>
+        </span>
+        <div class="from-div">
+            <h2>Parking Ticket Form</h2>
+            <form action="#" id="ticketForm">
+                <div class="input-box">
+                    <img src="/frontend/static/numberplate_icon.jpg" height:50px; width:50px; >
+                    <label for="vehicleNumber">Vehicle Number:</label>
+                    <input type="text" id="vehicleNumber" name="vehicleNumber" required>
+                </div>
+                <div class="inputww">
+                    <div class="input-box">
+                        <i class="fa-solid fa-square-parking" id="icon1"></i>
+                        <label for="assignedSlot">Assigned Slot:</label>
+                        
+                        <input type="text" id="assignedSlot" name="assignedSlot" readonly>
+                    </div>
+                    <div class="input-box">
+                        
+                        <label for="mobileNumber  ">Mobile Number</label>
+                        <i class="fa-solid fa-phone-volume" id="icon1"></i>
+                        <input type="tel" id="mobileNumber" name="mobileNumber" maxlength="10" placeholder="9828986795">
+                    </div>
+                </div>    
+                <div class="input-box">
+                    <i class="fa-solid fa-id-card" id="icon1"></i>
+                    <label for="ownersName">Owner's Name:</label>
+                    
+                    <input type="text" id="ownersName" name="ownersName" placeholder="Kelvin">
+                </div>
+                <div class="inputww">
+                    <div class="input-box">
+                        <i class="fa-regular fa-calendar" id="icon1"></i>
+                        <label for="date">Date:</label>
+                        <input type="text" id="date" name="date" readonly>
+                    </div>
+                    <div class="input-box adjust">
+                        <i class="fa-solid fa-clock" id="icon1"></i>
+                        <label for="time">Time:</label>
+                        <input type="text" id="time" name="time" readonly>
+                    </div>    
+                </div>
+                <button type="button" id="viewTicketButton">View Ticket</button>
+                <button type="button" id="printTicketButton">Print Ticket</button>
+            </form>
+        </div>
+    </div>
+
+    <script>  document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('popupbtn').addEventListener('click', function () {
+            var popup = document.getElementById('home-popup1');
+            popup.classList.toggle('visible');
+        });
+        document.querySelector('.close-w').addEventListener('click', function () {
+            var popup = document.getElementById('home-popup1');
+            popup.classList.remove('visible');  
+            var ticketview = document.getElementById('ticketprnt');
+            ticketview.classList.remove('visible1');
+        });
+        document.getElementById('viewTicketButton').addEventListener('click', function () {
+            var ticketview = document.getElementById('ticketprnt');
+            ticketview.classList.toggle('visible1');
+        });
+    });
+
+    </script>
+</body>
+</html>

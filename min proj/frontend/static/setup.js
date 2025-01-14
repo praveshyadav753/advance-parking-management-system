@@ -1,5 +1,76 @@
+const draggable = document.getElementById("draggable");
+let isDragging = false;
+let startX, startY, initialX, initialY;
+
+// Function to initiate dragging
+function startDrag(event) {
+    event.preventDefault();
+    isDragging = true;
+    startX = event.clientX || event.touches[0].clientX;
+    startY = event.clientY || event.touches[0].clientY;
+    initialX = draggable.offsetLeft;
+    initialY = draggable.offsetTop;
+
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchmove', drag);
+    document.addEventListener('touchend', stopDrag);
+}
+
+// Function to perform dragging
+function drag(event) {
+    if (!isDragging) return;
+
+    let currentX = event.clientX || event.touches[0].clientX;
+    let currentY = event.clientY || event.touches[0].clientY;
+
+    draggable.style.left = initialX + (currentX - startX) + 'px';
+    draggable.style.top = initialY + (currentY - startY) + 'px';
+}
+
+// Function to stop dragging
+function stopDrag() {
+    isDragging = false;
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('mouseup', stopDrag);
+    document.removeEventListener('touchmove', drag);
+    document.removeEventListener('touchend', stopDrag);
+}
+
+// Attach the event listeners
+draggable.addEventListener('mousedown', startDrag);
+draggable.addEventListener('touchstart', startDrag);
+
+
+
+cursor=document.getElementById('cursor');
+pen=document.getElementById('pen-tool');
+hand=document.getElementById('hand-tool');
+vector=document.getElementById('vector-pen');
+trash=document.getElementById('delete-tool');
+canvas_area=document.getElementById('canvas_area');
+
+hand.addEventListener('click',function(){
+    canvas_area.style.cursor = 'crosshair';
+
+});
+pen.addEventListener('click',function(){
+    canvas_area.style.cursor = 'url(path_to_pen_cursor_image), auto';
+});
+vector.addEventListener('click', function() {
+    canvas_area.style.cursor = 'grab';
+});
+
+
+
+
+
+    
+    
     document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('parkingCanvas');
+        canvas.width=liveFrame.offsetwidth;
+        canvas.height=liveFrame.offsetheight;
         const ctx = canvas.getContext('2d');
         let mode = 'auto'; // Default mode
         let currentArea = [];
@@ -52,22 +123,22 @@ function generateNewAreaId() {
             ctx.closePath();
             ctx.strokeStyle = color;
             ctx.stroke();
+            console.log(points[0][0])
         }
 
         fetch('/frame')
             .then(response => response.json())
             .then(data => {
-                if (data.frame) {
+                if (data.frame1) {
                     const liveFrame = document.getElementById('liveFrame');
-                    liveFrame.src = data.frame;
+                    liveFrame.src = data.frame1;
                     liveFrame.onload = function() {
-                        canvas.width = liveFrame.offsetWidth;
-                        canvas.height = liveFrame.offsetHeight;
-                        fetch('/parking-areas')
+                        fetch('/get_all_parking_areas')
                             .then(response => response.json())
                             .then(data => {
                                 areas = data;
                                 areas.forEach(area => {
+                                    // console.log(area.points)
                                     drawArea(area.points,'rgba(0, 0, 255, 1)');
                                 });
                             })
@@ -78,10 +149,7 @@ function generateNewAreaId() {
                 }
             });
 
-        document.getElementById('modeSelection').addEventListener('change', function(event) {
-            mode = event.target.value;
-            currentArea = [];
-        });
+        
 
         canvas.addEventListener('click', function(event) {
             const rect = canvas.getBoundingClientRect();
@@ -123,9 +191,5 @@ function generateNewAreaId() {
             }
         });
 
-        document.getElementById('submitArea').addEventListener('click', function() {
-            // Submit logic here
-            console.log('Submit the defined area', areas);
-            // Example: fetch('/api/submit-area', { method: 'POST', body: JSON.stringify({ areas: areas }), headers: { 'Content-Type': 'application/json' }});
-        });
+        
       });

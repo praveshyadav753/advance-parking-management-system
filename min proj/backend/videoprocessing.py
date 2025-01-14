@@ -126,7 +126,7 @@ def load_json_data(file_path):
         return json.load(file)
 
 def gen_frames(yolo_model, areas):
-    cap = cv2.VideoCapture('vedios/carPark.mp4')
+    cap = cv2.VideoCapture('../vedios/carPark.mp4')
     while True:
         ret, frame = cap.read()
         if not ret: 
