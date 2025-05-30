@@ -73,7 +73,7 @@ import cv2
 import numpy as np
 import model
 import json
-from database import get_collection
+from backend.database import get_collection
 
 
 areas_collection = get_collection("parkingSystem", "parkingAreas")
