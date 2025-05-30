@@ -1,6 +1,8 @@
 import threading
 from flask import Flask, render_template, send_from_directory, Response, jsonify, request
 import os
+import sys
+from pathlib import Path
 from flask_cors import CORS
 import base64
 import cv2
@@ -10,7 +12,7 @@ from flask_socketio import SocketIO
 from pymongo import MongoClient
 from .number_plate import detection
 from .videoprocessing import gen_frames, load_yolo_model, load_json_data
-from .database import clear_parking_records, clear_parking_areas, add_user, verify_login, get_mongo_client
+from backend.database import clear_parking_records, clear_parking_areas, add_user, verify_login, get_mongo_client
 
 
 # Setup directories for templates and static files
