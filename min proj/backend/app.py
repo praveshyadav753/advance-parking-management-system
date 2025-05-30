@@ -8,9 +8,9 @@ from io import BytesIO
 from flask_pymongo import PyMongo
 from flask_socketio import SocketIO
 from pymongo import MongoClient
-from database import clear_parking_records, clear_parking_areas, add_user, verify_login, get_mongo_client
-from number_plate import detection
-from videoprocessing import gen_frames, load_yolo_model, load_json_data
+from .database import clear_parking_records, clear_parking_areas, add_user, verify_login, get_mongo_client
+from .number_plate import detection
+from .videoprocessing import gen_frames, load_yolo_model, load_json_data
 
 # Setup directories for templates and static files
 template_dir = os.path.abspath('../frontend/templates')
