@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from AREAfile import load_parking_areas, save_parking_areas #file module import json
+from backend.AREAfile import load_parking_areas, save_parking_areas #file module import json
 from pynput.keyboard import Key, Listener #input key from keyboard
 import model
 
