@@ -6,7 +6,7 @@ import easyocr
 from io import BytesIO
 import base64  
 from backend.database import insert_parking_record, update_exit_time, get_parking_record, insert_parking_area, update_parking_area_status
-from AREAfile import load_parking_areas
+from backend.AREAfile import load_parking_areas
 from pymongo import MongoClient
 from flask_socketio import SocketIO, emit
 import threading
